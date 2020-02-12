@@ -1,0 +1,46 @@
+body {
+	background-color: #F0E4D4;
+	color: #603F36;
+	margin: 50px;
+	padding: 20px;
+	text-align: center;
+}
+
+.rows {
+	border: 2px solid #C9BA9B;
+	border-collapse: separate;
+	border-radius: 10px; 
+	padding: 45px;
+}
+
+.center_form{
+    margin: 0 auto;
+    width:30%;
+}
+
+input:hover {
+	background-color:#f5f5f5;
+}
+
+/*div {
+	padding: 30px;
+}*/
+
+.navbars {
+	font-family: 'Bad Script', cursive;
+	font-style: italic;
+	font-weight: 30px;
+	font-size: 25px;
+	font-kerning: 10px;
+}
+
+.head {
+	font-family: 'Satisfy', cursive;
+	padding: 20px;
+	font-size: 50px;
+}
+
+.banner {
+	height: 300px;
+	width: 1000px;
+}
