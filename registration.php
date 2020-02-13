@@ -17,29 +17,41 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 	<!-- Javascript -->
-	<link rel="stylesheet" type="text/css" href="bootstrap/js/bootstrap.min.js">
-	<link rel="stylesheet" type="text/css" href="bootstrap/js/jquery-3.4.1.slim.min.js">
-	<link rel="stylesheet" type="text/css" href="bootstrap/js/popper.min.js">
+	<script type="text/javascript" src="bootstrap/js/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
+
+	<!-- Validation Javascript -->
+	<script type="text/javascript" src="validation.js"></script>
 
 
 </head>
+
+
 <body>
 	<h1>Sign-Up</h1>
 
 	<!-- Registration form -->
 
-	<form action="login.html" method="POST" class="rows center_form" style="width: 600px; text-align: left;">
+	<form name="signupform"  id="signupform" action="" method="POST" class="rows center_form" style="width: 600px; text-align: left;">
 	  <div class="form-group row">
-	  	 <label for="nama" class="col-sm-2 col-form-label">Name</label>
+	  	 <label for="nickname" class="col-sm-2 col-form-label">Name</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="nama" placeholder="myname">
+	      <input type="text" class="form-control" id="nickname" placeholder="Irene Ford">
+	    </div>
+	   </div>
+
+	    <div class="form-group row">
+	  	 <label for="nickname" class="col-sm-2 col-form-label">Username</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="username" placeholder="Irenef123">
 	    </div>
 	   </div>
 
 	   <div class="form-group row">
 	    <label for="email" class="col-sm-2 col-form-label">Email</label>
 	    <div class="col-sm-10">
-	      <input type="email" class="form-control" id="email" placeholder="myname@email.com">
+	      <input type="email" class="form-control" id="email" placeholder="ireneford@email.com">
 	    </div>
 	  </div>
 
@@ -71,27 +83,22 @@
 	    </div>
 
 	  </fieldset>
-	  <div class="form-group row">
-	    <div class="col-sm-2">Sure?</div>
-	    <div class="col-sm-10">
-	      <div class="form-check">
-	        <input class="form-check-input" type="checkbox" id="check">
-	        <label class="form-check-label" for="check">
-	          Check
-	        </label>
-	      </div>
-	    </div>
-	  </div>
 
 
 	  <div class="form-group row">
 	    <div class="col-sm-10">
-	      <button type="submit" class="btn btn-secondary btn-sm">Sign in</button>
+	      <button type="submit" class="btn btn-secondary btn-sm" onclick="validate()">Sign in</button>
 	    </div>
 	  </div>
+
+
+	  <div>
+	  	<p id="error"></p>
+	  </div>
+
 </form>
 
 
-	<p>back to <a href="login.html">Log-in</a>.</p>
+	<p>back to <a href="login.php">Log-in</a>.</p>
 </body>
 </html>

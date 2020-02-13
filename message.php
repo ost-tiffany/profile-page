@@ -23,24 +23,25 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">  
 
-	<!-- Javascript -->
-	<link rel="stylesheet" type="text/css" href="bootstrap/js/bootstrap.min.js">
-	<link rel="stylesheet" type="text/css" href="bootstrap/js/jquery-3.4.1.slim.min.js">
-	<link rel="stylesheet" type="text/css" href="bootstrap/js/popper.min.js">
+		<!-- Javascript -->
+	<script type="text/javascript" src="bootstrap/js/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
 
+	
 </head>
 <body>
 
 	<!-- nav -->
 	<ul class="nav justify-content-center navbars">
 	  <li class="nav-item">
-	    <a class="nav-link" href="index.html" target="_blank">Home</a>
+	    <a class="nav-link" href="index.php" target="_blank">Home</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="gallery.html" target="_blank">Gallery</a>
+	    <a class="nav-link" href="gallery.php" target="_blank">Gallery</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="message.html">Contact</a>
+	    <a class="nav-link" href="message.php">Contact</a>
 	  </li>
 	</ul>
 
@@ -59,7 +60,7 @@
 		</address>
 
 	<!-- Log-out -->
-	<p class="text-center"><a href="login.html">Log-out</a>.</p>
+	<p class="text-center"><a href="login.php">Log-out</a>.</p>
 
 <!-- footer -->
    <section>
