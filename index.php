@@ -1,3 +1,6 @@
+<?php require'connect.php' ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +10,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<title>Index</title>
-
-
-	<!-- glyphicons -->
-   <!-- <link href = "http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet"> -->
 
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
@@ -46,9 +45,16 @@
 
 	 <hr style="width: 1000px; margin-bottom: 5px">
 
+	 <!-- greeting -->
+	 <p>your data profile  : <br>
+	 	<?= $row["nickname"]; ?>
+	 	<?= $row["user_name"]; ?>
+	 	<?= $row["email"]; ?>
+	 	</p>
 
 	<!-- banner -->
 	<img src="images/banner1.png" class="img-fluid banner" alt="forest">
+
 
 	<!-- content -->
 	<h1  class="col-md-6 offset-md-3 head">Lorem Ipsum</h1>
@@ -84,23 +90,6 @@
 		<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
 	    </div>
   	</div>
-
-
-	
-
-
-
-	 <!-- contact -->
-  <!--  <section>
-         <div class="row" style="margin-top: 200px; font-size: 15px;">
-          <div class="col-sm-12 text-center">
-             <span class="glyphicon glyphicon-user" style="padding-right: 10px; "></span>
-             <span class="glyphicon glyphicon-envelope" style="padding-right: 10px;"></span>
-             <span class="glyphicon glyphicon-facetime-video" style="padding-right: 10px: "></span>
-          </div>
-         </div>
-     </div>   
-  </section> -->
 
 
   		<!-- Log-out -->
