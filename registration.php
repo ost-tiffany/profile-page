@@ -1,17 +1,5 @@
 <?php require'connect.php';
 
-if(isset($_POST["submit"])) {
-	if(add_user($_POST) > 0) {
-		echo " 	<script>
-					alert('success adding user');
-					document.location.href ='index.php';
-				</script>";
-	} else {
-		echo "fail";
-		echo mysqli_error($db);
-	}
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +35,7 @@ if(isset($_POST["submit"])) {
 
 	<!-- Registration form -->
 
-	<form name="signupform"  id="signupform" action="" method="POST" class="rows center_form" style="width: 600px; text-align: left;">
+	<form name="signupform"  id="signupform" action="action/doRegister.php" method="POST" class="rows center_form" style="width: 600px; text-align: left;">
 	  <div class="form-group row">
 	  	 <label for="nickname" class="col-sm-2 col-form-label">Name</label>
 	    <div class="col-sm-10">
@@ -76,6 +64,13 @@ if(isset($_POST["submit"])) {
 	    </div>
 	  </div>
 
+	  <div class="form-group row">
+	    <label for="password" class="col-sm-2 col-form-label">Birthday</label>
+	    <div class="col-sm-10">
+	      <input type="date" class="form-control" id="birthday" name="birthday" >
+	    </div>
+	  </div>
+
 	  <fieldset class="form-group" id="gender" name="gender">
 	    <div class="row">
 	      <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
@@ -100,12 +95,43 @@ if(isset($_POST["submit"])) {
 
 	  <div class="form-group row">
 	    <div class="col-sm-10">
-	      <input type="submit" class="btn btn-secondary btn-sm" value="Sign in">
+	      <input type="submit" name="submit" class="btn btn-secondary btn-sm" value="Sign in">
 	    </div>
 	  </div>
+	  
+
+
+	  <!--  1) registration.php?
+	   2) registration.php?note=error1,error2
+
+	   ini udah ambil buat di echo  -->
+
+	<div style="color: red;">
+	<?php 
+	  	if(isset($_GET["note1"])) {
+			$error1 = $_GET["note1"]; 
+
+  			echo $error1;		
+
+		} ?>
+
+	<br>
+
+
+	<?php
+		if(isset($_GET["note2"])) {
+			$error2 = $_GET["note2"];
+
+  			echo $error2;		
+
+		// echo $error;
+		// var_dump($error);
+		} ?>
+	</div>
 
 	</form>
-	
+
+
 
 	<div id="errorcontainer">
  		<p id="errormessage" style="color: red;"></p>
@@ -114,7 +140,7 @@ if(isset($_POST["submit"])) {
 
 <script>
 	$("#signupform").submit(function(event) {
-	event.preventDefault();
+	
 
 	var errormessage = [];
 	var regex = RegExp("^[a-zA-Z0-9]*$");
@@ -126,6 +152,7 @@ if(isset($_POST["submit"])) {
   
   	if(name == "") {
     	errormessage.push("please input your name");
+
 	}
 
 	if(!regex.test(name)) {
@@ -157,6 +184,7 @@ if(isset($_POST["submit"])) {
   	}
 
   	if (errormessage.length > 0 ) {
+  		event.preventDefault();
   		temp = [];
   		for (var i = 0; i < errormessage.length; i++) {
   			temp.push('<p>'+errormessage[i]+'</p>');		
@@ -165,8 +193,6 @@ if(isset($_POST["submit"])) {
   		$("#errormessage").html(temp);
     	return false;
  	}
-
- 	// $("#errormessage").hide();
 
 });
 </script>

@@ -1,41 +1,35 @@
 <?php
 
-	$db = mysqli_connect("localhost","root","","datatest");
-
-	$result = mysqli_query($db, "SELECT * FROM users");
 
 
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$database = "datatest";
 
-	function query($query) {
-	global $db;
-	$result = mysqli_query($db,$query);
+	// Create connection
+	$db = new mysqli($servername, $username, $password, $database);
 
-	$rows = [];
-		while ($row = mysqli_fetch.assoc($result)) {
-			$rows[] = $row;
-		}
-		return $rows;
+	// Check connection
+	if ($db->connect_error) {
+	    die("Connection failed: " . $db->connect_error);
 	}
+	//echo "Connected successfully";
+	// $db = mysqli_connect("localhost","root","","datatest");
 
-	function add_user($data) {
-		global $db;
-		$name = $_POST["nickname"];
-		$username = $_POST["user_name"];
-		$email = $_POST["email"];
-		$password = $_POST["password"];
-		$sex = $_POST["gender"];
-		$at = 
+	// $result = mysqli_query($db, "SELECT * FROM users");
 
 
-		if(isset($_POST["submit"])) {
 
-			$query = "insert into users (user_name, nickname, email, password, birthday, gender)
-			values ('$username','$name','$email','$password','','$sex')";
+	// function query($query) {
+	// global $db;
+	// $result = mysqli_query($db,$query);
 
-			mysqli_query($db,$query);
-		}
-	}
-
-
+	// $rows = [];
+	// 	while ($row = mysqli_fetch.assoc($result)) {
+	// 		$rows[] = $row;
+	// 	}
+	// 	return $rows;
+	// }
 
  ?>

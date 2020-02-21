@@ -63,7 +63,6 @@
 
 <script>
 $("#loginform").submit(function(event) {
-	event.preventDefault();
 
 	var errormessage = [];
 	var regex = RegExp("^[a-zA-Z0-9]*$");
@@ -87,6 +86,7 @@ $("#loginform").submit(function(event) {
   	}
 
   	if (errormessage.length > 0 ) {
+  		event.preventDefault();
   		temp = [];
   		for (var i = 0; i < errormessage.length; i++) {
   			temp.push('<p>'+errormessage[i]+'</p><br>');		
@@ -96,7 +96,6 @@ $("#loginform").submit(function(event) {
     	return false;
 	}
 	
-	  // $("#errormessage").hide();
 	}
 
 );
