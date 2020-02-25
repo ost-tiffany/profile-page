@@ -1,5 +1,8 @@
-<?php require'connect.php' 
+<?php 
+session_start();
 
+
+	require'connect.php'; 
 
 
 ?>
@@ -35,7 +38,7 @@
 	<!-- Log in  -->
 	<h1>Log-In</h1>
 
-	<form name="loginform"  id="loginform" action="index.php" method="POST" class="rows center_form" style="width: 500px; text-align: center;">
+	<form name="loginform"  id="loginform" action="action/doLogin.php" method="POST" class="rows center_form" style="width: 500px; text-align: center;">
 	  <div class="form-group">
 	    <label for="user_name">Username</label>
 	    <input type="text" class="form-control" id="user_name" name="user_name">
@@ -52,6 +55,15 @@
     		<input type="checkbox" class="form-check-input" id="exampleCheck1">
     		<label class="form-check-label" for="exampleCheck1">Check me out</label>
     	</div>
+
+    <div style="color: red;">
+    	<?php
+    		if(isset($_GET["error"])) {
+    			$failmesssage = $_GET["error"];
+    		 	 echo $failmesssage; 
+    		 } 
+    	?>
+    </div>
 
  	<div id="errorcontainer">
  		<p id="errormessage" style="color: red;"></p>

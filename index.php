@@ -1,4 +1,17 @@
-<?php require'connect.php' ?>
+<?php
+
+session_start();
+
+ require'connect.php';
+
+//$id = $_GET["id"];
+//echo $id;
+
+//$query = "SELECT * FROM users WHERE user_id = $id";
+//echo $query;
+//$result = $db->query($query); //execute select 
+
+ ?>
 
 
 <!DOCTYPE html>
@@ -47,9 +60,9 @@
 
 	 <!-- greeting -->
 	 <p>your data profile  : <br>
-	 	<?= $row["nickname"]; ?>
-	 	<?= $row["user_name"]; ?>
-	 	<?= $row["email"]; ?>
+	 	<?= $_SESSION["nickname"]; ?>
+	 	<?= $_SESSION["user_name"]; ?>
+	 	<?= $_SESSION["email"]; ?>
 	 	</p>
 
 	<!-- banner -->

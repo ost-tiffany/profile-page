@@ -9,7 +9,6 @@ $query = "SELECT * FROM users WHERE user_id = $id";
 //echo $query;
 $result = $db->query($query); //execute select 
 
-
 //num_rows = total dari select 
 // if($result->num_rows != 1) {
 // 	echo 'エラー！';
@@ -113,8 +112,8 @@ $result = $db->query($query); //execute select
 
 	</div>
 
-<!-- 	<p>automatically redirect to login after 10 seconds <br>
-		 or <a href="login.php">click here</a>.</p> -->
+	<p>automatically redirect to login after 10 seconds <br>
+		 or <a href="login.php">click here</a>.</p>
 
 </body>
 </html>

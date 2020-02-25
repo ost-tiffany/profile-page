@@ -34,18 +34,23 @@ include '../connect.php';
 
 			}
 
+			// saat ada error :
 			if(count($errormessage) > 0) {
 				$true_error_message ='';
+				//perulangan 
 				$temp = 1;
 				for ($i = 0; $i < count($errormessage); $i++) {
-			
+					//klo i yang ud terakhir i==1  | 2-1 = 1
 					if($i == count($errormessage) - 1)
 					{
 						$true_error_message .= 'note'.$temp.'='.$errormessage[$i];
+						//note2=username already exists
 					} else {
+						//note1=email already exists&
 						$true_error_message .= 'note'.$temp.'='.$errormessage[$i].'&';
 					}
 					
+  					//temp = temp + 1;
   					$temp++;
   					
   				}
@@ -63,7 +68,7 @@ include '../connect.php';
 	 			VALUES ('$username','$nickname','$email','$password','$birthday','$sex')";
 
 		 	//kalo masuk database
-	 			
+
 		 	//db->query == execute query dari db->query(QUERY)
 		 	if ($db->query($command)) {
 		 	// echo "New record created successfully";
@@ -83,8 +88,6 @@ include '../connect.php';
 			// 	echo "<script> location.href='registration.php'; </script>";
 			// 	exit;
 			// }
-
-			
 
 	} 
 	//kalo tombol submit ga diklik
