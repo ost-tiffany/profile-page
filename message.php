@@ -1,5 +1,19 @@
 <?php 
 session_start();
+$timeout = 30;
+	if (!isset($_SESSION["login"])) {
+		header("Location: login.php");
+		exit;
+	}
+	if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
+    // last request was more than 30 minutes ago
+    	session_unset();     // unset $_SESSION variable for the run-time 
+    	session_destroy();   // destroy session data in storage
+    	header("Location: login.php?error=no activity for 30s");
+	}
+
+	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+
 
 require'connect.php';
 
@@ -8,52 +22,20 @@ require'connect.php';
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
 
-	<!-- responsive meta tag -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php
+	include('elements/header.php');
+?>
 
 	<title>Contact</title>
 
 
-	<!-- glyphicons -->
-   <!-- <link href = "http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet"> -->
-
-	<!-- bootstrap -->
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	
-	<!-- css biasa -->
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-	<!-- font -->
-	<link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
-
-	<link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">  
-
-		<!-- Javascript -->
-	<script type="text/javascript" src="bootstrap/js/jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
-
-	
-</head>
 <body>
 
 	<!-- nav -->
-	<ul class="nav justify-content-center navbars">
-	  <li class="nav-item">
-	    <a class="nav-link" href="index.php" target="_blank">Home</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="gallery.php" target="_blank">Gallery</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="message.php">Contact</a>
-	  </li>
-	</ul>
-
-	 <hr style="width: 1000px; margin-bottom: 5px">
+	<?php
+		include('elements/navbar.php');
+	?>
 
 	 <!-- banner -->
 	<img src="images/banner2.png" class="img-fluid banner" alt="earth">
@@ -62,8 +44,8 @@ require'connect.php';
 	<h1  class="col-md-6 offset-md-3 head">Contact Info </h1>
 
 		<!-- Adress -->
-		<address class="col-md-6 offset-md-3 head">
-			<strong>Heimat</strong>
+		<address class="col-md-6 offset-md-3">
+			Heimat
 
 		</address>
 
@@ -71,15 +53,9 @@ require'connect.php';
 	<p class="text-center"><a href="login.php">Log-out</a>.</p>
 
 <!-- footer -->
-   <section>
-     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <hr style="width: 1000px; margin-bottom: 10px">
-          <p> &copy 2020 </p>
-        </div>
-      </div>
-   </section>
+  	<?php
+		include('elements/footer.php');
+	?>
 
 
 </body>

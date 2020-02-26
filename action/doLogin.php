@@ -16,11 +16,20 @@ if (isset($_POST["login"])) {
 	if ($result->num_rows == 0) {
 		echo "<script> window.location.href = '../login.php?error=".$failmessage."'; </script>";
 	} else {
-			//$_SESSION["login"] = true;
-			//$_SESSION["nickname"] =
-			//$_SESSION["user_name"] =
-			//$_SESSION["email"] = 
-		//echo "<script> window.location.href = '../index.php?name=".$_SESSION["nickname"]."'; </script>";
+
+			$_SESSION["login"] = true;
+
+			//fetch disni
+				while ($hasil = $result->fetch_assoc()) {
+					$_SESSION["username"] = $hasil["user_name"];
+					$_SESSION["nickname"] = $hasil["nickname"];
+					$_SESSION["email"] = $hasil["email"];
+					$_SESSION["birthday"] = $hasil["birthday"];
+					$_SESSION["gender"] =  $hasil["gender"] == 1 ?
+									"male" : "female";
+				}
+			echo "<script> window.location.href = '../index.php'; </script>";
+		
 	}
 
 }

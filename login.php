@@ -1,6 +1,9 @@
 <?php 
 session_start();
-
+	if (isset($_SESSION["login"])) {
+		header("Location: index.php");
+		exit;
+	}
 
 	require'connect.php'; 
 
@@ -41,7 +44,7 @@ session_start();
 	<form name="loginform"  id="loginform" action="action/doLogin.php" method="POST" class="rows center_form" style="width: 500px; text-align: center;">
 	  <div class="form-group">
 	    <label for="user_name">Username</label>
-	    <input type="text" class="form-control" id="user_name" name="user_name">
+	    <input type="text" class="form-control" id="user_name" name="user_name" placeholder="email or username">
 	  </div>
 
 	  <div class="form-group">
@@ -51,10 +54,10 @@ session_start();
  
 		<input type="submit" class="btn btn-secondary btn-sm" value="Login" id="login" name="login" >
 
-		<div class="form-group form-check" style="margin-top: 20px; font-size: 12px; text-align: left;">
+		<!-- <div class="form-group form-check" style="margin-top: 20px; font-size: 12px; text-align: left;">
     		<input type="checkbox" class="form-check-input" id="exampleCheck1">
     		<label class="form-check-label" for="exampleCheck1">Check me out</label>
-    	</div>
+    	</div> -->
 
     <div style="color: red;">
     	<?php
@@ -84,10 +87,6 @@ $("#loginform").submit(function(event) {
   	if(username == "") {
     	errormessage.push("please input your username");
 	}
-
-	if(!regex.test(username)) {
-     	errormessage.push("username format must be alphanumeric");
- 	}
 
  	if(password == "") {
     	errormessage.push("please input your password");

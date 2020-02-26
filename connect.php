@@ -19,17 +19,4 @@
 
 	// $result = mysqli_query($db, "SELECT * FROM users");
 
-
-
-	// function query($query) {
-	// global $db;
-	// $result = mysqli_query($db,$query);
-
-	// $rows = [];
-	// 	while ($row = mysqli_fetch.assoc($result)) {
-	// 		$rows[] = $row;
-	// 	}
-	// 	return $rows;
-	// }
-
  ?>

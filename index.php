@@ -1,69 +1,45 @@
 <?php
 
 session_start();
+$timeout = 30;
+	if (!isset($_SESSION["login"])) {
+		header("Location: login.php");
+		exit;
+	}
+	if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $timeout)) {
+    // last request was more than 30 seconds ago
+    	session_unset();     // unset $_SESSION variable for the run-time 
+    	session_destroy();   // destroy session data in storage
+    	header("Location: login.php?error=no activity for 30s");
+	}
+
+	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
  require'connect.php';
 
-//$id = $_GET["id"];
-//echo $id;
+// $username = $_GET["name"];
+// $_SESSION["username"] = $username;
 
-//$query = "SELECT * FROM users WHERE user_id = $id";
-//echo $query;
-//$result = $db->query($query); //execute select 
-
+ //$res="SELECT * FROM users WHERE user_name=".$_SESSION['username'];
+ //$result = $db->query($res); //execute select 
+ //var_dump($result);
  ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
+<?php
+	include('elements/header.php');
+?>
 
-	<!-- responsive meta tag -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Index</title>
 
-	<title>Index</title>
-
-	<!-- bootstrap -->
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	
-	<!-- css biasa -->
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-	<!-- font -->
-	<link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
-
-	<link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet"> 
-	
-		<!-- Javascript -->
-	<script type="text/javascript" src="bootstrap/js/jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
-
-</head>
 <body>
 
 	<!-- nav -->
-	<ul class="nav justify-content-center navbars">
-	  <li class="nav-item">
-	    <a class="nav-link" href="index.php">Home</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="gallery.php" target="_blank">Gallery</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="message.php" target="_blank">Contact</a>
-	  </li>
-	</ul>
-
-	 <hr style="width: 1000px; margin-bottom: 5px">
-
-	 <!-- greeting -->
-	 <p>your data profile  : <br>
-	 	<?= $_SESSION["nickname"]; ?>
-	 	<?= $_SESSION["user_name"]; ?>
-	 	<?= $_SESSION["email"]; ?>
-	 	</p>
+	<?php
+		include('elements/navbar.php');
+	?>
 
 	<!-- banner -->
 	<img src="images/banner1.png" class="img-fluid banner" alt="forest">
@@ -104,22 +80,10 @@ session_start();
 	    </div>
   	</div>
 
-
-  		<!-- Log-out -->
-	<p class="text-center"><a href="login.php">Log-out</a>.</p>
-
 	<!-- footer -->
-   <section>
-     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <hr style="width: 1000px; margin-bottom: 10px">
-          <p> &copy 2020 </p>
-        </div>
-      </div>
-   </section>
-
-
+  	<?php
+		include('elements/footer.php');
+	?>
 
 </body>
 </html>
