@@ -29,6 +29,8 @@ require'connect.php';
 
 	<title>My Page</title>
 
+
+
 <body>
 
 	<!-- nav -->
@@ -43,7 +45,7 @@ require'connect.php';
 	<table class="col-md-6 offset-md-5" style="text-align: left; width: 500px;">
 	    <tr>
 	    	<tr>
-				<td scope="row"> <a href="action/doEdit.php" >edit</a> | <a href="action/doErase.php?name=<?= $_SESSION["username"]; ?>" onclick="<script>confirm('yakin?')</script>">delete</a> </td>
+				<td scope="row"> <a href="action/doEdit.php" >edit</a> | <a href="action/doErase.php" type="submit" onclick="confirm('are you sure?'); confirm('really really sure?');" name="delete" id="delete">delete</a> </td>
 			</tr>	
 
 	      <th scope="row">Username</th>
@@ -78,5 +80,8 @@ require'connect.php';
 		include('elements/footer.php');
 	?>
 
+	</script>
+
 </body>
 </html>
+

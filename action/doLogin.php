@@ -27,11 +27,13 @@ if (isset($_POST["login"])) {
 					$_SESSION["birthday"] = $hasil["birthday"];
 					$_SESSION["gender"] =  $hasil["gender"] == 1 ?
 									"male" : "female";
+					$_SESSION["deleted_flag"] = $hasil["deleted_flag"];
 				}
 			echo "<script> window.location.href = '../index.php'; </script>";
 		
 	}
 
+var_dump($deleted_flag1);
 }
 
  ?>
