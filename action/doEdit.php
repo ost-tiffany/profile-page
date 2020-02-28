@@ -15,20 +15,16 @@ $genderedit = $_POST["genderedit"];
 $checkuser= "SELECT * FROM users WHERE (user_name = '$usernameedit' OR email = '$emailedit')";
 
 $checkuserdb=$db->query($checkuser);
-$messages = array();
-
 
 	if(isset($_POST["submitedit"])) {
-	 if ($checkuserdb->num_rows > 0) {
+
         // output data of each row
-        $row = $checkuserdb->fetch_assoc();
-        	if ($usernameedit==$row['user_name']) {
-           		array_push($messages, "Username already exists");
-        	}
-     		if ($emailedit==$row['email']) {
-            	array_push($messages, "Email already exists");
-        	}
-    	}
+		while ($row = $checkuserdb->fetch_assoc()) {
+			$samanama = $row['user_name'];
+			$samaemail = $row['email']; 
+	
+		}
+			
 
     	$editDB = "UPDATE users SET 
     				user_name = '$usernameedit',
@@ -36,27 +32,51 @@ $messages = array();
     				email = '$emailedit',
     				password = '$passwordedit',
     				birthday = '$birthdayedit',
-    				gender = '$genderedit',
+    				gender = '$genderedit'
 	 				WHERE user_id = '$useredit'";
- 	 	
+ 	 	// echo $editDB;
  	 	$result = $db->query($editDB);
+		$messages = array();
+		if ($usernameedit == $samanama) {
+			array_push($messages, "Username already exists");
+		}
+		 
+	  	if ($emailedit == $samaemail) {
+		 	array_push($messages, "Email already exists");
+		}
 
- 	 	if ($result) {
- 	 		array_push($messages, "data changed");
- 	 	} 
-
- 	 	else {
- 	 		array_push($messages, "data failed to be changed");
- 	 	}
-
+		if(!$result) {
+			array_push($messages, "error");
+		}
 		
 		if(count($messages) > 0) {
-
-		 	for ($i = 0; $i < count($messages); i++) {
-  				$messages = $message;
+			$message ='';
+			//perulangan 
+			$temp = 1;
+			for ($i = 0; $i < count($messages); $i++) {
+				//klo i yang ud terakhir i==1  | 2-1 = 1
+				if($i == count($messages) - 1)
+				{
+					$message .= 'note'.$temp.'='.$messages[$i];
+					//note2=username already exists
+				} else {
+					//note1=email already exists&
+					$message .= 'note'.$temp.'='.$messages[$i].'&';
+				}
+				
+				  //temp = temp + 1;
+				  $temp++;
+				  
 			}
- 		
- 	 	}
- 			header("Location:../edituser.php");
+			header("Location:../edituser.php?".$message);
+		} 
+		
+		if($result) {
+			$success="data has been changed";
+			//success no error 
+			header("Location:../edituser.php?message=".$success);
 		}
+
+		
+	}
  ?>

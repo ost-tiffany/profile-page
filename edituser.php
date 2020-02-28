@@ -75,19 +75,19 @@ require'connect.php';
 	    	</div>
 	  	</div>
 
-	  	<fieldset class="form-group" id="editgender" name="editgender">
+	  	<fieldset class="form-group" id="genderedit" name="genderedit">
 	    	<div class="row">
 	      		<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
 	      		<div class="col-sm-10">
 	        		<div class="form-check">
-	          			<input class="form-check-input" type="radio" name="editgender" value="1">
+	          			<input class="form-check-input" type="radio" name="genderedit" value="1" checked>
 	          			<label class="form-check-label" for="gender1">
 	            		Male
 	          			</label>
 	        		</div>
 
 	        		<div class="form-check">
-	          			<input class="form-check-input" type="radio" name="editgender" value="2">
+	          			<input class="form-check-input" type="radio" name="genderedit" value="2">
 	          			<label class="form-check-label" for="gender2">
 	            		Female
 	          			</label>
@@ -105,11 +105,38 @@ require'connect.php';
 
 	  	 <div>
 	    	<?php
-	    	if (isset($_POST["submitedit"])) {
-	    		echo $messages;	
+	    	if (isset($_GET["note1"])) {
+	    		echo $_GET["note1"];	
 	    	}
 	    	 ?>
 	    </div>
+
+		
+		<div>
+	    	<?php
+	    	if (isset($_GET["note2"])) {
+	    		echo $_GET["note2"];	
+	    	}
+	    	 ?>
+	    </div>
+
+		<div>
+	    	<?php
+	    	if (isset($_GET["note3"])) {
+	    		echo $_GET["note3"];	
+	    	}
+	    	 ?>
+	    </div>
+
+		<div>
+	    	<?php
+	    	if (isset($_GET["message"])) {
+	    		echo $_GET["message"];	
+	    	}
+	    	 ?>
+	    </div>
+
+
 
 	  	<div id="errorcontainer">
  			<p id="errormessage" style="color: red;"></p>
@@ -124,7 +151,7 @@ require'connect.php';
 	?>
 
 	<script>
-	$("#signupform").submit(function(event) {
+	$("#editform").submit(function(event) {
 	
 	var errormessage = [];
 	var regex = RegExp("^[a-zA-Z0-9]*$");
@@ -132,7 +159,7 @@ require'connect.php';
 	var username = $("#edituser_name").val();
 	var email =  $("#editemail").val();
 	var password = $("#editpassword").val();
-	var sex = $("input[name='editgender']:checked");
+	var sex = $("input[name='genderedit']:checked");
 
 	if(!regex.test(name)) {
      	errormessage.push("name format must be alphanumeric");

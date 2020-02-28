@@ -42,6 +42,23 @@ require'connect.php';
 	<h1  class="col-md-6 offset-md-3 head">Gallery </h1>
 
 	<!-- navbar gallery -->
+	<div class="input-group mb-3">
+  		<div class="input-group-prepend">
+    		<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Image</button>
+    		<div class="dropdown-menu">
+      			<a class="dropdown-item" href="#">Upload</a>
+      			<a class="dropdown-item" href="#">List</a>
+      			<a class="dropdown-item" href="#">Update</a>
+				<a class="dropdown-item" href="#">Delete</a>
+    	</div>
+  	</div>
+
+	<!-- Upload box -->
+	<input type="files">
+	<!-- List Images -->
+
+	
+  	
 
 	 	<!-- Log-out -->
 	<p class="text-center"><a href="login.php">Log-out</a>.</p>
