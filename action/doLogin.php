@@ -9,7 +9,7 @@ if (isset($_POST["login"])) {
 	$password = $_POST["password"];
 	$failmessage = "password and email is not exists";
 
-	$samesame = "SELECT * FROM users WHERE (user_name = '$username' OR email = '$username') AND password = '$password'";
+	$samesame = "SELECT * FROM users WHERE (user_name = '$username' OR email = '$username') AND password = '$password' AND deleted_flag = 0 ";
 
 	$result = $db->query($samesame);
 
@@ -28,6 +28,8 @@ if (isset($_POST["login"])) {
 					$_SESSION["gender"] =  $hasil["gender"] == 1 ?
 									"male" : "female";
 					$_SESSION["deleted_flag"] = $hasil["deleted_flag"];
+					$_SESSION["user_id"] = $hasil["user_id"];
+					
 				}
 			echo "<script> window.location.href = '../index.php'; </script>";
 		

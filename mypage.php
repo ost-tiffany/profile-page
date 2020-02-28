@@ -45,9 +45,14 @@ require'connect.php';
 	<table class="col-md-6 offset-md-5" style="text-align: left; width: 500px;">
 	    <tr>
 	    	<tr>
-				<td scope="row"> <a href="action/doEdit.php" >edit</a> | <a href="action/doErase.php" type="submit" onclick="confirm('are you sure?'); confirm('really really sure?');" name="delete" id="delete">delete</a> </td>
+				<td scope="row"> <a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | <a href="action/doErase.php" type="submit" name="delete" id="delete">delete</a> </td>
 			</tr>	
 
+		<tr>
+		<th scope="row">User id</th>
+	       <td>:</td>
+	      <td><?= $_SESSION["user_id"]; ?></td>
+	    </tr>
 	      <th scope="row">Username</th>
 	       <td>:</td>
 	      <td><?= $_SESSION['username']; ?></td>
@@ -73,14 +78,13 @@ require'connect.php';
 	      <td><?= $_SESSION["birthday"]; ?></td>
 	    </tr>
 		    
+	   
 	</table>
 
 	<!-- footer -->
   	<?php
 		include('elements/footer.php');
 	?>
-
-	</script>
 
 </body>
 </html>
