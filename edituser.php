@@ -17,6 +17,7 @@
 
 require'connect.php';
 
+
  ?>
 
  <!DOCTYPE html>
@@ -38,26 +39,27 @@ require'connect.php';
 	 <!-- content -->
 	<h1  class="col-md-6 offset-md-3 head"> Data </h1>
 
+
 	<!-- edit form -->
 	<form name="editform"  id="editform" action="action/doEdit.php" method="POST" class="rows center_form" style="width: 600px; text-align: left; margin-top:50px; margin-bottom:50px;">
 		<div class="form-group row">
 	  		<label for="nickname" class="col-sm-2 col-form-label">Name</label>
 	    	<div class="col-sm-10">
-	      		<input type="text" class="form-control" id="editnickname" name="editnickname" value="<?= $_SESSION['nickname']; ?>">
+	      		<input type="text" class="form-control" id="editnickname" name="editnickname">
 	    	</div>
 	  	</div>
 
 	  	<div class="form-group row">
 	  		<label for="user_name" class="col-sm-2 col-form-label">Username</label>
 	    	<div class="col-sm-10">
-	      		<input type="text" class="form-control" id="edituser_name" name="edituser_name" value="<?= $_SESSION['username']; ?>">
+	      		<input type="text" class="form-control" id="edituser_name" name="edituser_name">
 	    	</div>
 	  	</div>
 
 	  	<div class="form-group row">
 	    	<label for="email" class="col-sm-2 col-form-label">Email</label>
 	    	<div class="col-sm-10">
-	      		<input type="email" class="form-control" id="editemail" name="editemail" value="<?= $_SESSION['email']; ?>">
+	      		<input type="email" class="form-control" id="editemail" name="editemail">
 	    	</div>
 	  	</div>
 
@@ -71,7 +73,7 @@ require'connect.php';
 		<div class="form-group row">
 	    	<label for="password" class="col-sm-2 col-form-label">Birthday</label>
 	    	<div class="col-sm-10">
-	      		<input type="date" class="form-control" id="editbirthday" name="editbirthday" value="<?= $_SESSION["birthday"]; ?>" >
+	      		<input type="date" class="form-control" id="editbirthday" name="editbirthday" >
 	    	</div>
 	  	</div>
 
@@ -142,7 +144,6 @@ require'connect.php';
  			<p id="errormessage" style="color: red;"></p>
 	 	</div>
 
-
 	</form>
 
  	<!-- footer -->
@@ -161,6 +162,10 @@ require'connect.php';
 	var password = $("#editpassword").val();
 	var sex = $("input[name='genderedit']:checked");
 
+	if(name == "" || username == "" || email == "" || password == "") {
+		errormessage.push("please fill all the column");
+	}
+	
 	if(!regex.test(name)) {
      	errormessage.push("name format must be alphanumeric");
  	}

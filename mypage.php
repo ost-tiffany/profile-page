@@ -14,9 +14,13 @@ $timeout = 30;
 
 	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
-
+	
 require'connect.php';
 
+// database data
+$usernameaccount = $_SESSION["user_name"];	
+$userprofile = "SELECT * FROM users WHERE user_name = '$usernameaccount'";
+$result = $db->query($userprofile);
 
  ?>
 
@@ -41,6 +45,7 @@ require'connect.php';
 	<!-- content -->
 	<h1  class="col-md-6 offset-md-3 head">Your Data Profile</h1>
 
+	<?php while ($hasil = $result->fetch_assoc()) { ?>
 
 	<table class="col-md-6 offset-md-5" style="text-align: left; width: 500px;">
 	    <tr>
@@ -51,35 +56,37 @@ require'connect.php';
 		<tr>
 		<th scope="row">User id</th>
 	       <td>:</td>
-	      <td><?= $_SESSION["user_id"]; ?></td>
+	      <td><?=  $hasil["user_id"]; ?></td>
 	    </tr>
 	      <th scope="row">Username</th>
 	       <td>:</td>
-	      <td><?= $_SESSION['username']; ?></td>
+	      <td><?= $hasil["user_name"]; ?></td>
 	    </tr>
 	    <tr>
 	      <th scope="row">Name</th>
 	       <td>:</td>
-	      <td><?= $_SESSION['nickname']; ?></td>
+	      <td><?= $hasil["nickname"]; ?></td>
 	    </tr>
 	    <tr>
 	      <th scope="row">Email</th>
 	       <td>:</td>
-	      <td><?= $_SESSION['email']; ?></td>
+	      <td><?= $hasil["email"]; ?></td>
 	    </tr>
 	    <tr>
 	      <th scope="row">Gender</th>
 	       <td>:</td>
-	      <td><?= $_SESSION["gender"]; ?></td>
+	      <td><?= $hasil["gender"] == 1 ?
+				"male" : "female"; ?></td>
 	    </tr>
 	    <tr>
 	      <th scope="row">Birthdate</th>
 	       <td>:</td>
-	      <td><?= $_SESSION["birthday"]; ?></td>
+	      <td><?= $hasil["birthday"]; ?></td>
 	    </tr>
-		    
 	   
 	</table>
+
+	<?php } ?>
 
 	<!-- footer -->
   	<?php
