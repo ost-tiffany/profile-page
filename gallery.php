@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$timeout = 2600;
+$timeout = 3000;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;
@@ -16,6 +16,13 @@ $timeout = 2600;
 
 
 require'connect.php';
+
+$productwood = "SELECT * FROM products WHERE product_type = 1 AND delete_flag = 0";
+$productresult = $db->query($productwood); 
+
+$productother = "SELECT * FROM products WHERE product_type = 2 AND delete_flag = 0";
+$otherresult = $db->query($productother); 
+
 
 
  ?>
@@ -52,7 +59,7 @@ require'connect.php';
   		</a>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 			<a class="dropdown-item" href="#upload">Upload</a>
-			<a class="dropdown-item" href="#list">List</a>
+			<a class="dropdown-item" href="#list">File List</a>
 			<a class="dropdown-item" href="#update">Update</a>
 			<a class="dropdown-item" href="#delete">Delete</a>
 		</div>
@@ -92,9 +99,53 @@ require'connect.php';
 	</form>
 	
 
-	<!-- List Images -->
-		<h4 id='list' class=" col-md-6 offset-md-3 ">List</h4>
 
+
+	<!-- List Images -->
+		<h4 id='list' class=" col-md-6 offset-md-3 ">File List</h4>
+		
+		<div style="margin:30px;">
+			<a  href="#wood">wood</a> |
+			<a  href="#other">others</a>
+		</div>
+		
+		<!-- wood -->
+		<h5> WOOD </h5>
+		<div class="container" style="width:1000px;" name="wood" id="wood">	
+			<div  class="row justify-content-md-center" >
+				<?php $i = 1; ?>
+					<?php foreach ($productresult as $prodrow) { ?>
+						<div class="col-md-auto" style="margin-bottom:30px;">
+							<a href="images/gallery/product/<?= $prodrow["product_id"] ?>/<?= $prodrow["product_image"] ?>"> 
+								<img src="images/gallery/product/<?= $prodrow["product_id"] ?>/<?= $prodrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
+							</a> <br>
+							<?= $prodrow["product_name"] ?> <br>
+							<p> creator : <strong> <?= $prodrow["created_by_user_name"] ?> </strong>
+							
+						</div>		
+					<?php $i++; ?>
+				<?php }; ?>
+			</div>
+		</div>
+
+		<!-- other -->
+		<h5> OTHER </h5>
+		<div class="container" style="width:1000px;" name="other" id="other">	
+			<div  class="row justify-content-md-center" >
+				<?php $i = 1; ?>
+					<?php foreach ($otherresult as $othrow) { ?>
+						<div class="col-md-auto" style="margin-bottom:30px;">
+							<a href="images/gallery/product/<?= $othrow["product_id"] ?>/<?= $othrow["product_image"] ?>"> 
+								<img src="images/gallery/product/<?= $othrow["product_id"] ?>/<?= $othrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
+							</a> <br>
+							<?= $othrow["product_name"] ?> <br>
+							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong>
+							
+						</div>		
+					<?php $i++; ?>
+				<?php }; ?>
+			</div>
+		</div>
 
 	<!-- Update -->
 		<h4 id='update' class="col-md-6 offset-md-3">Update</h4>

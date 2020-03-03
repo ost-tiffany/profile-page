@@ -50,7 +50,10 @@ $result = $db->query($userprofile);
 	<table class="col-md-6 offset-md-5" style="text-align: left; width: 500px;">
 	    <tr>
 	    	<tr>
-				<td scope="row"> <a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | <a href="action/doErase.php" type="submit" name="delete" id="delete">delete</a> </td>
+				<td scope="row"> 
+				<a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | 
+				<a href="#" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a>
+				</td>
 			</tr>	
 
 		<tr>
@@ -85,6 +88,18 @@ $result = $db->query($userprofile);
 	    </tr>
 	   
 	</table>
+
+	<script>
+	function confirmerase() {
+            var conf = confirm("Are you sure you want to delete your account?");
+            if(!conf) { 
+				document.location.href = 'mypage.php';
+				return false;
+            } else {
+				document.getElementById("delete").href ="action/doErase.php";
+			}
+        }
+	</script>
 
 	<?php } ?>
 

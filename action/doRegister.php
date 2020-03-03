@@ -64,7 +64,7 @@ include '../connect.php';
 
 
 			//success the validation
-			$command = "insert into users (user_name,nickname,email,password,birthday,gender)
+			$command = "INSERT INTO users (user_name,nickname,email,password,birthday,gender)
 	 			VALUES ('$username','$nickname','$email','$password','$birthday','$sex')";
 
 		 	//kalo masuk database
