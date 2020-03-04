@@ -60,8 +60,8 @@ $otherresult = $db->query($productother);
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 			<a class="dropdown-item" href="#upload">Upload</a>
 			<a class="dropdown-item" href="#list">File List</a>
-			<a class="dropdown-item" href="#update">Update</a>
-			<a class="dropdown-item" href="#delete">Delete</a>
+			<!-- <a class="dropdown-item" href="#update">Update</a>
+			<a class="dropdown-item" href="#delete">Delete</a> -->
 		</div>
 	</div>
 	
@@ -102,15 +102,15 @@ $otherresult = $db->query($productother);
 
 
 	<!-- List Images -->
-		<h4 id='list' class=" col-md-6 offset-md-3 ">File List</h4>
+		<h4 id='list' class=" col-md-6 offset-md-3" style="margin-top:50px;">File List</h4>
 		
-		<div style="margin:30px;">
+		<div style="margin:10px;">
 			<a  href="#wood">wood</a> |
 			<a  href="#other">others</a>
 		</div>
 		
 		<!-- wood -->
-		<h5> WOOD </h5>
+		<h5 class="col-4 col-md-5"> WOOD </h5>
 		<div class="container" style="width:1000px;" name="wood" id="wood">	
 			<div  class="row justify-content-md-center" >
 				<?php $i = 1; ?>
@@ -119,9 +119,12 @@ $otherresult = $db->query($productother);
 							<a href="images/gallery/product/<?= $prodrow["product_id"] ?>/<?= $prodrow["product_image"] ?>"> 
 								<img src="images/gallery/product/<?= $prodrow["product_id"] ?>/<?= $prodrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
 							</a> <br>
+
+							<a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | 
+							<a href="#" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a> <br>
+
 							<?= $prodrow["product_name"] ?> <br>
 							<p> creator : <strong> <?= $prodrow["created_by_user_name"] ?> </strong>
-							
 						</div>		
 					<?php $i++; ?>
 				<?php }; ?>
@@ -129,7 +132,7 @@ $otherresult = $db->query($productother);
 		</div>
 
 		<!-- other -->
-		<h5> OTHER </h5>
+		<h5 class="col-4 col-md-5"> OTHER </h5>
 		<div class="container" style="width:1000px;" name="other" id="other">	
 			<div  class="row justify-content-md-center" >
 				<?php $i = 1; ?>
@@ -138,8 +141,12 @@ $otherresult = $db->query($productother);
 							<a href="images/gallery/product/<?= $othrow["product_id"] ?>/<?= $othrow["product_image"] ?>"> 
 								<img src="images/gallery/product/<?= $othrow["product_id"] ?>/<?= $othrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
 							</a> <br>
+
+							<a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | 
+							<a href="#" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a> <br>
+
 							<?= $othrow["product_name"] ?> <br>
-							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong>
+							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong><br>
 							
 						</div>		
 					<?php $i++; ?>
@@ -148,13 +155,9 @@ $otherresult = $db->query($productother);
 		</div>
 
 	<!-- Update -->
-		<h4 id='update' class="col-md-6 offset-md-3">Update</h4>
-
-	
-
-
+		<!-- <h4 id='update' class="col-md-6 offset-md-3">Update</h4> -->
 	<!-- delete -->
-		<h4 id='delete' class="col-md-6 offset-md-3">Delete</h4>
+		<!-- <h4 id='delete' class="col-md-6 offset-md-3">Delete</h4> -->
 
 
 
