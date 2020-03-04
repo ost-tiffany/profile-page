@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$timeout = 3000;
+$timeout = 30;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;

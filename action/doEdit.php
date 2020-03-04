@@ -38,11 +38,11 @@ $checkuserdb=$db->query($checkuser);
  	 	$result = $db->query($editDB);
 		$messages = array();
 		if ($usernameedit == $samanama) {
-			array_push($messages, "Username already exists");
+			array_push($messages, "email already exists");
 		}
 		 
 	  	if ($emailedit == $samaemail) {
-		 	array_push($messages, "Email already exists");
+		 	array_push($messages, "username already exists");
 		}
 
 		if(!$result) {

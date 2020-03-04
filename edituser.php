@@ -1,6 +1,6 @@
 <?php 
  session_start();
- $timeoutedit = 60;
+ $timeoutedit = 6000;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;
@@ -16,6 +16,11 @@
 
 
 require'connect.php';
+
+$id=$_SESSION["user_id"];
+$edituser = "SELECT * FROM users WHERE user_id = '$id'";
+$resultedituser = $db->query($edituser);
+
 
 
  ?>
@@ -41,39 +46,41 @@ require'connect.php';
 
 
 	<!-- edit form -->
+
+	<?php while ($row = $resultedituser->fetch_assoc()) { ?>
 	<form name="editform"  id="editform" action="action/doEdit.php" method="POST" class="rows center_form" style="width: 600px; text-align: left; margin-top:50px; margin-bottom:50px;">
 		<div class="form-group row">
 	  		<label for="nickname" class="col-sm-2 col-form-label">Name</label>
 	    	<div class="col-sm-10">
-	      		<input type="text" class="form-control" id="editnickname" name="editnickname">
+	      		<input type="text" class="form-control" id="editnickname" name="editnickname" value="<?= $row["nickname"] ?>">
 	    	</div>
 	  	</div>
 
 	  	<div class="form-group row">
 	  		<label for="user_name" class="col-sm-2 col-form-label">Username</label>
 	    	<div class="col-sm-10">
-	      		<input type="text" class="form-control" id="edituser_name" name="edituser_name">
+	      		<input type="text" class="form-control" id="edituser_name" name="edituser_name" value="<?= $row["user_name"] ?>" >
 	    	</div>
 	  	</div>
 
 	  	<div class="form-group row">
 	    	<label for="email" class="col-sm-2 col-form-label">Email</label>
 	    	<div class="col-sm-10">
-	      		<input type="email" class="form-control" id="editemail" name="editemail">
+	      		<input type="email" class="form-control" id="editemail" name="editemail" value="<?= $row["email"] ?>">
 	    	</div>
 	  	</div>
 
 	  	<div class="form-group row">
 	    	<label for="password" class="col-sm-2 col-form-label">Password</label>
 	    	<div class="col-sm-10">
-	      		<input type="password" class="form-control" id="editpassword" name="editpassword">
+	      		<input type="password" class="form-control" id="editpassword" name="editpassword" value="<?= $row["password"] ?>">
 	    	</div>
 	  	</div>
 
 		<div class="form-group row">
 	    	<label for="password" class="col-sm-2 col-form-label">Birthday</label>
 	    	<div class="col-sm-10">
-	      		<input type="date" class="form-control" id="editbirthday" name="editbirthday" >
+	      		<input type="date" class="form-control" id="editbirthday" name="editbirthday" value="<?= $row["birthday"] ?>" >
 	    	</div>
 	  	</div>
 
@@ -81,15 +88,15 @@ require'connect.php';
 	    	<div class="row">
 	      		<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
 	      		<div class="col-sm-10">
-	        		<div class="form-check">
-	          			<input class="form-check-input" type="radio" name="genderedit" value="1" checked>
+	        		<div class="form-check" value="<?= $row["gender"] ?>" >
+	          			<input class="form-check-input" type="radio" name="genderedit" value="1"  <?php echo ( $row["gender"]=='1')?'checked':'' ?>>
 	          			<label class="form-check-label" for="gender1">
 	            		Male
 	          			</label>
 	        		</div>
 
 	        		<div class="form-check">
-	          			<input class="form-check-input" type="radio" name="genderedit" value="2">
+	          			<input class="form-check-input" type="radio" name="genderedit" value="2"  <?php echo ( $row["gender"]=='2')?'checked':'' ?>>
 	          			<label class="form-check-label" for="gender2">
 	            		Female
 	          			</label>
@@ -105,38 +112,43 @@ require'connect.php';
 	    	</div>
 	  	</div>
 
-	  	 <div>
-	    	<?php
-	    	if (isset($_GET["note1"])) {
-	    		echo $_GET["note1"];	
-	    	}
-	    	 ?>
-	    </div>
+	<?php } ?>
 
-		
-		<div>
-	    	<?php
-	    	if (isset($_GET["note2"])) {
-	    		echo $_GET["note2"];	
-	    	}
-	    	 ?>
-	    </div>
 
-		<div>
-	    	<?php
-	    	if (isset($_GET["note3"])) {
-	    		echo $_GET["note3"];	
-	    	}
-	    	 ?>
-	    </div>
+		<div style="color:red;">
+			<div>
+				<?php
+				if (isset($_GET["note1"])) {
+					echo $_GET["note1"];	
+				}
+				?>
+			</div>
 
-		<div>
-	    	<?php
-	    	if (isset($_GET["message"])) {
-	    		echo $_GET["message"];	
-	    	}
-	    	 ?>
-	    </div>
+			
+			<div>
+				<?php
+				if (isset($_GET["note2"])) {
+					echo $_GET["note2"];	
+				}
+				?>
+			</div>
+
+			<div>
+				<?php
+				if (isset($_GET["note3"])) {
+					echo $_GET["note3"];	
+				}
+				?>
+			</div>
+
+			<div>
+				<?php
+				if (isset($_GET["message"])) {
+					echo $_GET["message"];	
+				}
+				?>
+			</div>
+		</div>
 
 
 

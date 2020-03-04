@@ -42,6 +42,9 @@ $result = $db->query($userprofile);
 		include('elements/navbar.php');
 	?>
 
+	<!-- banner -->
+	<img src="images/banner4.jpg" class="img-fluid banner" alt="sky">
+
 	<!-- content -->
 	<h1  class="col-md-6 offset-md-3 head">Your Data Profile</h1>
 

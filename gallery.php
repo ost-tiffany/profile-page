@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$timeout = 3000;
+$timeout = 30000;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;
@@ -47,6 +47,15 @@ $otherresult = $db->query($productother);
 
 	 <!-- banner -->
 	<img src="images/banner3.jpg" class="img-fluid banner" alt="sky">
+
+	<div>
+    	<?php
+    		if(isset($_GET["note"])) {
+				echo $_GET["note"];
+    		 } 
+    	?>
+    </div>
+
 
 	  <!-- content -->
 	<h1  class="col-md-6 offset-md-3 head">Gallery </h1>
@@ -120,8 +129,8 @@ $otherresult = $db->query($productother);
 								<img src="images/gallery/product/<?= $prodrow["product_id"] ?>/<?= $prodrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
 							</a> <br>
 
-							<a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | 
-							<a href="#" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a> <br>
+							<a href="editphoto.php?id=<?= $prodrow["product_id"] ?>" type="submit" name="edit" id="edit" >edit</a> | 
+							<a href="#" type="submit" name="delete" id="delete" onclick=confirmerasewood();>delete</a> <br>
 
 							<?= $prodrow["product_name"] ?> <br>
 							<p> creator : <strong> <?= $prodrow["created_by_user_name"] ?> </strong>
@@ -142,8 +151,8 @@ $otherresult = $db->query($productother);
 								<img src="images/gallery/product/<?= $othrow["product_id"] ?>/<?= $othrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
 							</a> <br>
 
-							<a href="edituser.php" type="submit" name="edit" id="edit" >edit</a> | 
-							<a href="#" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a> <br>
+							<a href="editphoto.php?id=<?= $othrow["product_id"] ?>" type="submit" name="edit" id="edit" >edit</a> | 
+							<a href="#" type="submit" name="delete" id="delete" onclick=confirmeraseoth();>delete</a> <br>
 
 							<?= $othrow["product_name"] ?> <br>
 							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong><br>
@@ -159,6 +168,27 @@ $otherresult = $db->query($productother);
 	<!-- delete -->
 		<!-- <h4 id='delete' class="col-md-6 offset-md-3">Delete</h4> -->
 
+	<script>
+	function confirmerasewood() {
+            var conf = confirm("Are you sure you want to delete this photo?");
+            if(!conf) { 
+				document.location.href = 'gallery.php';
+				return false;
+            } else {
+				document.location.href ="action/doErasePhoto.php?id=<?= $prodrow["product_id"] ?>";
+			}
+		}
+
+	function confirmeraseoth() {
+            var conf = confirm("Are you sure you want to delete this photo?");
+            if(!conf) { 
+				document.location.href = 'gallery.php';
+				return false;
+            } else {
+				document.location.href ="action/doErasePhoto.php?id=<?= $othrow["product_id"] ?>";
+			}
+        }
+	</script>
 
 
 	<!-- footer -->
