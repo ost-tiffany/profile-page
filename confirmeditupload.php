@@ -95,11 +95,7 @@ require'connect.php';
             <!-- gambar baru -->
 
             <?php if($gambarnya == '') { ?>
-                <input type="hidden" class="form-control-file" id="edituploadimage" name="edituploadimage"  value="images/gallery/product/<?= $idproduct ?>/<?= $gambarlama ?>">
-                <input type="hidden" class="form-control-file" id="namedituploadimage" name="namedituploadimage"  value="<?= $gambarlama ?>">
 
-                <!-- gambar lama -->
-                <input type="hidden" id="oldimage" name="oldimage"  value="<?= $gambarlama ?>">
                 <img src="images/gallery/product/<?= $idproduct ?>/<?= $gambarlama ?>" alt="" class="img-thumbnail">    
             <?php 
             } 
@@ -120,7 +116,7 @@ require'connect.php';
 
 
         <div style="margin-top:30px;">
-        <input type="submit" class="btn btn-secondary btn-sm" id="newsubmitupload" name="newsubmitupload" value="upload"> 
+        <input type="submit" class="btn btn-secondary btn-sm" id="newsubmitupload" name="submitupload" value="upload"> 
         <a href="gallery.php" class="btn btn-secondary btn-sm" id="cancelupload" name="cancelupload" onclick=confirmcancelupld();> cancel </a>
         </div>
     </form>

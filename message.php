@@ -43,11 +43,11 @@ require'connect.php';
 	 <!-- content -->
 	<h1  class="col-md-6 offset-md-3 head">Contact Info </h1>
 
-		<!-- Adress -->
-		<address class="col-md-6 offset-md-3">
-			Heimat
+		<p>please call or email to : <br>
+			070-4060-1808 <br>
+			lorem@ipsun.com <p>
 
-		</address>
+		<p> Thank You<p>
 
 	<!-- Log-out -->
 	<p class="text-center"><a href="login.php">Log-out</a>.</p>

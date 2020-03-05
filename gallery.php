@@ -25,6 +25,9 @@ $otherresult = $db->query($productother);
 
 
 
+// pagination
+
+
  ?>
 
 
@@ -69,8 +72,6 @@ $otherresult = $db->query($productother);
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 			<a class="dropdown-item" href="#upload">Upload</a>
 			<a class="dropdown-item" href="#list">File List</a>
-			<!-- <a class="dropdown-item" href="#update">Update</a>
-			<a class="dropdown-item" href="#delete">Delete</a> -->
 		</div>
 	</div>
 	
@@ -106,20 +107,33 @@ $otherresult = $db->query($productother);
  			</div>
 
 	</form>
-	
-
-
 
 	<!-- List Images -->
-		<h4 id='list' class=" col-md-6 offset-md-3" style="margin-top:50px;">File List</h4>
+		<h4 id='list' class="col-md-6 offset-md-3" style="margin-top:50px;">File List</h4>
 		
 		<div style="margin:10px;">
 			<a  href="#wood">wood</a> |
 			<a  href="#other">others</a>
 		</div>
+
+	<!-- search -->
+		<form name="searchone" id="searchone" action="search.php" method=POST class="input-group input-group-sm mb-3 col-md-6 offset-md-2" style="width:300px;">
+  			<input type="text" name="carii" id="carii" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"  placeholder="name/creator">
+				<div class="input-group-prepend">
+    				<button type="submit" id="caributton" name="caributton" class="btn btn-outline-secondary" id="inputGroup-sizing-sm" onclick=search();>search</button>
+  				</div>
+			<p id="errormessagesearch" style="color: red;"></p>
+		</form>
+
+ 				
+
+
+		<!-- ichiran -->
 		
 		<!-- wood -->
-		<h5 class="col-4 col-md-5"> WOOD </h5>
+		<h5 class="col-4 col-md-5"> <strong>　WOOD</strong> </h5>
+		<hr style="width: 1000px; margin-bottom: 10px">
+
 		<div class="container" style="width:1000px;" name="wood" id="wood">	
 			<div  class="row justify-content-md-center" >
 				<?php $i = 1; ?>
@@ -130,7 +144,7 @@ $otherresult = $db->query($productother);
 							</a> <br>
 
 							<a href="editphoto.php?id=<?= $prodrow["product_id"] ?>" type="submit" name="edit" id="edit" >edit</a> | 
-							<a href="#" type="submit" name="delete" id="delete" onclick=confirmerasewood();>delete</a> <br>
+							<a href="action/doErasePhoto.php?id=<?= $prodrow["product_id"] ?>" type="submit" name="delete2" id="delete2" onclick=confirmerase();>delete</a> <br>
 
 							<?= $prodrow["product_name"] ?> <br>
 							<p> creator : <strong> <?= $prodrow["created_by_user_name"] ?> </strong>
@@ -139,9 +153,11 @@ $otherresult = $db->query($productother);
 				<?php }; ?>
 			</div>
 		</div>
-
+		
 		<!-- other -->
-		<h5 class="col-4 col-md-5"> OTHER </h5>
+		<h5 class="col-4 col-md-5"> <strong> OTHER </strong> </h5>
+		<hr style="width: 1000px; margin-bottom: 10px">
+
 		<div class="container" style="width:1000px;" name="other" id="other">	
 			<div  class="row justify-content-md-center" >
 				<?php $i = 1; ?>
@@ -152,7 +168,7 @@ $otherresult = $db->query($productother);
 							</a> <br>
 
 							<a href="editphoto.php?id=<?= $othrow["product_id"] ?>" type="submit" name="edit" id="edit" >edit</a> | 
-							<a href="#" type="submit" name="delete" id="delete" onclick=confirmeraseoth();>delete</a> <br>
+							<a href="action/doErasePhoto.php?id=<?= $othrow["product_id"] ?>" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a> <br>
 
 							<?= $othrow["product_name"] ?> <br>
 							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong><br>
@@ -163,31 +179,28 @@ $otherresult = $db->query($productother);
 			</div>
 		</div>
 
-	<!-- Update -->
-		<!-- <h4 id='update' class="col-md-6 offset-md-3">Update</h4> -->
-	<!-- delete -->
-		<!-- <h4 id='delete' class="col-md-6 offset-md-3">Delete</h4> -->
 
 	<script>
-	function confirmerasewood() {
-            var conf = confirm("Are you sure you want to delete this photo?");
-            if(!conf) { 
-				document.location.href = 'gallery.php';
-				return false;
-            } else {
-				document.location.href ="action/doErasePhoto.php?id=<?= $prodrow["product_id"] ?>";
-			}
-		}
 
-	function confirmeraseoth() {
-            var conf = confirm("Are you sure you want to delete this photo?");
-            if(!conf) { 
-				document.location.href = 'gallery.php';
-				return false;
-            } else {
-				document.location.href ="action/doErasePhoto.php?id=<?= $othrow["product_id"] ?>";
-			}
+	function search() {
+			$("#searchone").submit(function(event) {
+				var carii = $("#carii").val();
+				if(carii == "") {
+					document.getElementById("errormessagesearch").innerHTML = "Please write at least 1 character";
+					event.preventDefault();
+					return false;
+				}
+			});
+	}
+
+	document.getElementById('delete').addEventListener('click',function(event) {confirmerasewood(e);},false);
+        function confirmerase(){
+        var conf = confirm("Are you sure you want to delete this photo?");
+            if(!conf){
+				event.preventDefault();
         }
+    }
+
 	</script>
 
 

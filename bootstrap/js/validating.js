@@ -11,8 +11,6 @@ function validate() {
         //[0] artinya filesnya 1 doang,liat dalemnya gitu
         //ternary operator
         var uploadimage = document.getElementById("uploadimage").files[0] ? document.getElementById("uploadimage").files[0] : '' ;
-        var acceptedImageTypes = ["image/jpeg","image/png"];
-
 
         if(uploadimage == '') {
             errormessage.push("please upload an image");
@@ -50,3 +48,4 @@ function validate() {
         
         ); 
 }
+
