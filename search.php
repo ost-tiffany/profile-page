@@ -18,10 +18,6 @@ $timeout = 30000;
 
 require'connect.php';
 
-$perpage = 6; //mau berapa data di 1 page
-$page = isset($_GET["page"]) ? (int)$_GET["page"] : 1; //kalo ga ada halnya, jadi hal 1
-$start = ($page > 1) ? ($page * $perpage) - $perpage : 0; //next halaman bisa hitung sendiri
-
 ?>
 
 
@@ -48,17 +44,6 @@ $start = ($page > 1) ? ($page * $perpage) - $perpage : 0; //next halaman bisa hi
 
         $carii = $_POST["carii"];
 
-
-        $carihalaman = "SELECT * FROM products 
-                        WHERE (product_name LIKE '%$carii%' OR
-                                product_type LIKE '%$carii%' OR
-                                created_by_user_name LIKE '%$carii%' OR
-                                updated_by_user_id LIKE '%$carii%' OR
-                                product_id LIKE '%$carii%') LIMIT $start, $perpage"; 
-        //berapa banyak data yang bisa dipakein (bukan yang dimunculin, cuma kek itungin aja)
-        $resultDBhalaman = $db->query($carihalaman); //berapa banyak files yang mau di show 1 halaman
-
-
         $cari = "SELECT * FROM products 
                 WHERE (product_name LIKE '%$carii%' OR
                     product_type LIKE '%$carii%' OR
@@ -82,7 +67,7 @@ $start = ($page > 1) ? ($page * $perpage) - $perpage : 0; //next halaman bisa hi
                 <div class="container" style="width:1000px;" name="search" id="search">	
                     <div  class="row justify-content-md-center" >
                         <?php $i = 1; ?>
-                        <?php foreach ($resultDBhalaman as $searchrow) { ?>
+                        <?php foreach ($cariDB as $searchrow) { ?>
                             <div class="col-md-auto" style="margin-bottom:30px;">
                                 <a href="images/gallery/product/<?= $searchrow["product_id"] ?>/<?= $searchrow["product_image"] ?>"> 
                                 <img src="images/gallery/product/<?= $searchrow["product_id"] ?>/<?= $searchrow["product_image"] ?>" style="width:300px; height:300px; object-fit: cover;" class="img-fluid rounded-circle"> 
@@ -100,25 +85,6 @@ $start = ($page > 1) ? ($page * $perpage) - $perpage : 0; //next halaman bisa hi
                         <?php }; ?>
                     </div>
                 </div>
-
-                <?php 
-		            $total = mysqli_num_rows($cariDB); //ngitung hasil data yang dimunculin
-		            $pages = ceil($total/$perpage);
-		        ?>
-
-		<div class="col-4 col-md-5 justify-content-center">
-			<?php if ($page > 1) { ?>
-				<a href="?carii&page=<?= $i - 1; ?>">&lt;</a>
-			<?php } ?>
-
-			<?php for($i=1; $i<=$pages; $i++) { ?>
-				<a href="?caributton&page=<?= $i ?>"> <?= $i ?></a>
-			<?php }  ?>
-
-			<?php if ($page < $pages) { ?>
-				<a href="?caributton&page=<?= $i + 1; ?>">&gt;</a>
-			<?php } ?>
-		</div>
                 
     <?php	} 
     } ?>

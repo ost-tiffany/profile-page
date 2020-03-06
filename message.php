@@ -49,9 +49,6 @@ require'connect.php';
 
 		<p> Thank You<p>
 
-	<!-- Log-out -->
-	<p class="text-center"><a href="login.php">Log-out</a>.</p>
-
 <!-- footer -->
   	<?php
 		include('elements/footer.php');
