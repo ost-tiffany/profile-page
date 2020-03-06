@@ -49,3 +49,21 @@ function validate() {
         ); 
 }
 
+function search() {
+  $("#searchone").submit(function(event) {
+    var carii = $("#carii").val();
+    if(carii == "") {
+      document.getElementById("errormessagesearch").innerHTML = "Please write at least 1 character";
+      event.preventDefault();
+      return false;
+    }
+  });
+}
+
+document.getElementById('delete').addEventListener('click',function(event) {confirmerase(e);},false);
+    function confirmerase(){
+    var conf = confirm("Are you sure you want to delete this photo?");
+        if(!conf){
+    event.preventDefault();
+    }
+}

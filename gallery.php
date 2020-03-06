@@ -17,15 +17,12 @@ $timeout = 30000;
 
 require'connect.php';
 
-$productwood = "SELECT * FROM products WHERE product_type = 1 AND delete_flag = 0";
+// limit for the latest 6 data only to be shown
+$productwood = "SELECT * FROM products WHERE product_type = 1 AND delete_flag = 0 ORDER BY product_id DESC LIMIT 6";
 $productresult = $db->query($productwood); 
 
-$productother = "SELECT * FROM products WHERE product_type = 2 AND delete_flag = 0";
+$productother = "SELECT * FROM products WHERE product_type = 2 AND delete_flag = 0 ORDER BY product_id DESC LIMIT 6";
 $otherresult = $db->query($productother); 
-
-
-
-// pagination
 
 
  ?>
@@ -125,13 +122,12 @@ $otherresult = $db->query($productother);
 			<p id="errormessagesearch" style="color: red;"></p>
 		</form>
 
- 				
-
 
 		<!-- ichiran -->
 		
 		<!-- wood -->
 		<h5 class="col-4 col-md-5"> <strong>　WOOD</strong> </h5>
+		
 		<hr style="width: 1000px; margin-bottom: 10px">
 
 		<div class="container" style="width:1000px;" name="wood" id="wood">	
@@ -147,15 +143,17 @@ $otherresult = $db->query($productother);
 							<a href="action/doErasePhoto.php?id=<?= $prodrow["product_id"] ?>" type="submit" name="delete2" id="delete2" onclick=confirmerase();>delete</a> <br>
 
 							<?= $prodrow["product_name"] ?> <br>
-							<p> creator : <strong> <?= $prodrow["created_by_user_name"] ?> </strong>
+							<p> creator : <strong> <?= $prodrow["created_by_user_name"] ?> </strong> </p>
 						</div>		
 					<?php $i++; ?>
 				<?php }; ?>
 			</div>
+			<a href="woodlist.php"> click here for more >> <a>
 		</div>
 		
 		<!-- other -->
-		<h5 class="col-4 col-md-5"> <strong> OTHER </strong> </h5>
+		<h5 class="col-4 col-md-5" style="margin-top:50px;"> <strong> OTHER </strong> </h5>
+		
 		<hr style="width: 1000px; margin-bottom: 10px">
 
 		<div class="container" style="width:1000px;" name="other" id="other">	
@@ -171,47 +169,19 @@ $otherresult = $db->query($productother);
 							<a href="action/doErasePhoto.php?id=<?= $othrow["product_id"] ?>" type="submit" name="delete" id="delete" onclick=confirmerase();>delete</a> <br>
 
 							<?= $othrow["product_name"] ?> <br>
-							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong><br>
-							
+							<p> creator : <strong> <?= $othrow["created_by_user_name"] ?> </strong><br> </p>
 						</div>		
 					<?php $i++; ?>
 				<?php }; ?>
 			</div>
+			<a href="otherlist.php"> click here for more >> </a>
 		</div>
-
-
-	<script>
-
-	function search() {
-			$("#searchone").submit(function(event) {
-				var carii = $("#carii").val();
-				if(carii == "") {
-					document.getElementById("errormessagesearch").innerHTML = "Please write at least 1 character";
-					event.preventDefault();
-					return false;
-				}
-			});
-	}
-
-	document.getElementById('delete').addEventListener('click',function(event) {confirmerasewood(e);},false);
-        function confirmerase(){
-        var conf = confirm("Are you sure you want to delete this photo?");
-            if(!conf){
-				event.preventDefault();
-        }
-    }
-
-	</script>
 
 
 	<!-- footer -->
   	<?php
 		include('elements/footer.php');
 	?>
-
-
-
-
 
 </body>
 </html>
