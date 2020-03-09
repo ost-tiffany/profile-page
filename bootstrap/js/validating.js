@@ -67,3 +67,47 @@ document.getElementById('delete').addEventListener('click',function(event) {conf
     event.preventDefault();
     }
 }
+
+document.getElementById('cancel').addEventListener('click',function(event) {confirmcancel(e);},false);
+function confirmcancel(){
+  var conf = confirm("Are you sure you want to cancel order?");
+    if(!conf){
+  event.preventDefault();
+  }
+}
+
+$(document).ready(function() {
+  $('.js-example-basic-single').select2( {
+    ajax: (
+      
+    )
+  });
+});
+
+// function cekkata() {
+//     //ajax search js
+//     var carii = document.getElementById('carii');
+//     var containerdata = document.getElementById('containerdata');
+//     // saat ketik search js
+//     carii.addEventListener('keyup', function() {
+
+//         if(carii.length >4) {
+//             console.log("test");
+//             var xhr = new XMLHttpRequest();
+    
+//             // cek kesiapan ajax (sumber ajaxnya respon)
+//             //readystate itu kesiapan sebuah sumber, dari 0-4, 4 udah siap
+//             //status, 200 artinya sumber oke, (kek 404 ga bisa kan?) bisa dicek di network
+//             xhr.onreadystatechange = function() {
+//                 if(xhr.readyState == 4 && xhr.status == 200) {
+//                     containerdata.innerHTML = xhr.responseText;   
+//                 }
+//             }
+    
+//             //eksekusi ajax, method, sumber data ajax, asinkronus true, 
+//             xhr.open('GET','gallerydata.php?carii=' + carii.value,false);
+//             xhr.send();
+//         }
+//         // object ajaxnya 
+//     });
+// }

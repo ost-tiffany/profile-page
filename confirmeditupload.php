@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$timeout = 30000;
+$timeout = 3600000;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;
@@ -9,7 +9,7 @@ $timeout = 30000;
     // last request was more than 30 minutes ago
     	session_unset();     // unset $_SESSION variable for the run-time 
     	session_destroy();   // destroy session data in storage
-    	header("Location: login.php?error=no activity for 30s");
+    	header("Location: login.php?error=no activity for 60s");
 	}
 
 	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
