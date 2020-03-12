@@ -44,7 +44,7 @@ require'connect.php';
 	 <!-- content -->
 	<h1  class="col-md-6 offset-md-3 head">Transaction Form</h1>
 
-	<form name="transactionform"  id="transactionform" action="action/doTransactionOrder.php" method="POST" class="rows center_form" style="width: 600px; text-align: left;">
+	<form name="transactionform"  id="transactionform" action="confirmtransaction.php" method="POST" class="rows center_form" style="width: 600px; text-align: left;">
 
 		<div class="form-group">
 			<label for="date" >Order Date</label>
@@ -102,6 +102,7 @@ require'connect.php';
 	?>
 
 	<!-- validation JS -->
+	<script type="text/javascript" src="bootstrap/js/validating.js"></script>
 	<script>
 
 	$(document).ready(function() {
@@ -115,7 +116,7 @@ require'connect.php';
 			var date = $("#date").val();
 			var address = $("#address").val();
 			var memo = $("#memo").val();
-			var item= $("#item").val();
+			var item = $("#item").val();
 			var quantity = $("#quantity").val();
 
 			if(date == '') {
