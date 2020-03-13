@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$timeout = 60000;
+$timeout = 7200;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;
@@ -9,7 +9,7 @@ $timeout = 60000;
     // last request was more than 30 minutes ago
     	session_unset();     // unset $_SESSION variable for the run-time 
     	session_destroy();   // destroy session data in storage
-    	header("Location: login.php?error=no activity for 60s");
+    	header("Location: login.php?error=no activity for 1hour");
 	}
 
 	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
@@ -27,12 +27,19 @@ require'connect.php';
 	include('elements/header.php');
 ?>
 
-<!-- select2 -->
-<link href="bootstrap/css/select2.min.css" rel="stylesheet" />
+<!--JS !-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="bootstrap/js/select2.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/validating.js" defer></script>
+
+
+<!--css !-->
+<link href="bootstrap/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
 	<title>Transaction Form</title>
-
 
 <body>
 
@@ -48,7 +55,7 @@ require'connect.php';
 
 		<div class="form-group">
 			<label for="date" >Order Date</label>
-			<input type="date" class="form-control" id="date" name="date" value="<?= date("Y-m-d",time()) ?>">
+			<input type="text" class="form-control" id="date" name="date">
 	  	</div>
 
 		<div class="form-group">
@@ -66,31 +73,32 @@ require'connect.php';
 		<div class="form-row col-md-12">
 				<button type="button" name="adding" id="adding" onclick=add() class="btn btn-light btn-sm btn-block">add new row</button>
 		</div>
+			<input type="hidden" value="3" id="count">
+			<div id="transactiondetail" name="transactiondetail" >
+				<?php for ($i=1; $i <=3 ; $i++) {  $listproductall = $db->query("SELECT * FROM products WHERE delete_flag = 0");?>
+				<div class="wrapper<?=$i?> row" >
+					<div class="form-group col-md-6">
+						<label for="item">Item</label>
+							<select class="js-example-basic-single form-control" id="item<?=$i?>" name="item[]">
+								<?php foreach ($listproductall as $row) { ?>
+									<option value='<?=$row["product_id"] ?>'><?=$row["product_id"] .' - '. $row["product_name"] ?></option>
+								<?php }; ?>
+							</select>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="quantity">Qty</label>
+						<input type="number" class="form-control" id="quantity" name="quantity[]" min="0">
+					</div>
+					<div class="form-group col-md-1">
+						<button type="button" name="deleterow" id="deleterow<?=$i?>"  onclick="delete_row(<?=$i?>);" class="btn btn-danger" style="margin-top:30px">delete</button>
+					</div>
+				</div>
+				<?php }; ?>
+			</div>
 
-		
-		<div id="transactiondetail" name="transactiondetail" class="form-row">
-			<?php for ($i=0; $i < 3 ; $i++) {  $listproductall = $db->query("SELECT * FROM products WHERE delete_flag = 0");?>
-			<div class="form-group col-md-6">
-				<label for="item">Item</label>
-					<select class="js-example-basic-single form-control" id="item" name="item[]">
-						<?php foreach ($listproductall as $row) { ?>
-							<option value='<?=$row["product_id"] ?>'><?=$row["product_id"] .' - '. $row["product_name"] ?></option>
-						<?php }; ?>
-					</select>
+			<div id="errorcontainer">
+				<p id="errororder" style="color: red;"></p>
 			</div>
-			<div class="form-group col-md-3">
-				<label for="quantity">Qty</label>
-				<input type="number" class="form-control" id="quantity" name="quantity[]" min="0">
-			</div>
-			<div class="form-group col-md-1">
-				<button type="button" name="deleterow" id="deleterow" onclick=deleterow(this) class="btn btn-danger" style="margin-top:30px">delete</button>
-			</div>
-			<?php }; ?>
-		</div>
-
-		<div id="errorcontainer">
- 			<p id="errororder" style="color: red;"></p>
- 		</div>
 
 		<a href="index.php" type="submit" class="btn btn-dark" name="cancel" id="cancel" onclick=confirmcancel()>cancel</a>
 		<button type="submit" name="order" id="order" class="btn btn-secondary" onclick= confirmorder() >Submit</button>
@@ -102,11 +110,15 @@ require'connect.php';
 	?>
 
 	<!-- validation JS -->
-	<script type="text/javascript" src="bootstrap/js/validating.js"></script>
 	<script>
-
 	$(document).ready(function() {
-  		$('.js-example-basic-single').select2();
+  		for (let index = 1; index <= 3; index++) {
+			$('#item'+index).select2();	  
+		}
+		 
+		$("#date").datepicker({
+			dateFormat: "yy-mm-dd",
+		});
 	});
 
 	function confirmorder() {
@@ -154,12 +166,18 @@ require'connect.php';
 	
 	function add(){
 		<?php $listproductall = $db->query("SELECT * FROM products WHERE delete_flag = 0"); ?>
-		var product = '<div class="form-group col-md-6" style="width:243px"><label for="item">Item</label><select class="js-example-basic-single form-control" id="item" name="item[]"><?php foreach ($listproductall as $row) { ?><option value="<?=$row['product_id'] ?>"><?=$row["product_id"] .' - '. $row["product_name"] ?></option><?php }; ?></select></div>';
+		var index = document.getElementById("count").value;
+		var flag =  index + 1;
+
+		var product = '<div class="form-group col-md-6"><label for="item">Item</label><select class="js-example-basic-single form-control" id="item'+flag+'" name="item[]"><?php foreach ($listproductall as $row) { ?><option value="<?=$row['product_id'] ?>"><?=$row["product_id"] .' - '. $row["product_name"] ?></option><?php }; ?></select></div>';
 
 		var qty = '<div class="form-group col-md-3"><label for="quantity">Qty</label><input type="number" class="form-control" id="quantity" name="quantity[]" min="0"></div>';
 		 
-		$("#transactiondetail").append('<div id="transactiondetail" name="transactiondetail" class="form-row">' + product + qty + '<div class="form-group col-md-1"><button type="button" name="deleterow" id="deleterow" onclick=deleterow(this) class="btn btn-danger" style="margin-top:30px">delete</button></div></div>');
-		};
+		$("#transactiondetail").append('<div class="wrapper'+flag+' row">' + product + qty + '<div class="form-group col-md-1"><button type="button" name="deleterow" id="deleterow'+flag+'" onclick="delete_row('+flag+')" class="btn btn-danger" style="margin-top:30px">delete</button></div></div>');
+
+		$('#item'+flag).select2();
+		document.getElementById("count").value++;
+		}
 		
 
 	// function deleterow(r) {
@@ -172,9 +190,20 @@ require'connect.php';
 	// 	$("#transactiondetail").remove();
 	// 	});
 
-	$("#transactiondetail").on("click", function(event) {
-		$(event.target).closest("#deleterow").remove();
-	})
+
+
+	function delete_row(index){
+		var flag = document.getElementById("count").value;
+		//hapus 
+		$(".wrapper"+index).remove();
+		if(flag==1) {
+			document.getElementById("count").value = 0;
+
+		} else {
+			document.getElementById("count").value--;
+		}
+	}
+
 
 	</script>
 </body>

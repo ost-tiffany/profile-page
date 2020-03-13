@@ -76,7 +76,7 @@ $buyername = $_SESSION["user_name"];
 		<hr style="width: 200px; margin-bottom: 10px">
 		
 		<div id="confirmtransactiondetail" name="confirmtransactiondetail" class="form-group" >
-            <label for="memo">Item :</label>
+            <label for="item">Item :</label>
             <?php   $items = $_POST["item"];
                     $qtys = $_POST["quantity"]; ?>
 			

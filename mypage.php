@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$timeout = 60;
+$timeout = 60000;
 	if (!isset($_SESSION["login"])) {
 		header("Location: login.php");
 		exit;
@@ -18,9 +18,13 @@ $timeout = 60;
 require'connect.php';
 
 // database data
-$usernameaccount = $_SESSION["user_name"];	
+$usernameaccount = $_SESSION["user_name"];		
 $userprofile = "SELECT * FROM users WHERE user_name = '$usernameaccount'";
 $result = $db->query($userprofile);
+
+//orderlist data
+$orderdata = "SELECT * FROM transaction";
+$resultdata = $db->query($orderdata);
 
  ?>
 
@@ -45,7 +49,7 @@ $result = $db->query($userprofile);
 	<!-- banner -->
 	<img src="images/banner4.jpg" class="img-fluid banner" alt="sky">
 
-	<!-- content -->
+	<!-- Your Data Profile -->
 	<h1  class="col-md-6 offset-md-3 head">Your Data Profile</h1>
 
 	<?php while ($hasil = $result->fetch_assoc()) { ?>
@@ -91,6 +95,40 @@ $result = $db->query($userprofile);
 	    </tr>
 	   
 	</table>
+	<?php }; ?>
+
+	<!-- Your Order Data -->
+	<h5  class="col-md-6 offset-md-3 head" style="margin-top:50px;">Order List</h5>
+
+	<table class="col-md-6 offset-sm-5" style="text-align: left; width: 500px;">
+	
+		<tr>
+			<th scope="row">Order No.</th>
+			<th scope="row">Status</th>
+			<th scope='row'>Detail</th>
+	    </tr>
+		<?php while ($hasilorder = $resultdata->fetch_assoc()) { ?>	
+		<tr>
+		    <td><?= $hasilorder["transaction_id"]; ?></td>
+			<td> <? switch ($hasilorder["status"]) {
+				case 1:
+					echo "on process";
+					break;
+				case 2:
+					echo "updated";
+					break;
+				case 3:
+					echo "completed";
+					break;
+				case 4:
+					echo "deleted";
+					break;
+				} ?>
+			</td>
+			<td><a href="detailorder.php?view=<?= $hasilorder["transaction_id"] ?>" class="btn btn-link" name="view" id="view" >view</a> </td>
+	    </tr>
+		<?php }; ?>
+	</table>
 
 	<script>
 	function confirmerase() {
@@ -104,8 +142,6 @@ $result = $db->query($userprofile);
         }
 	</script>
 
-	<?php } ?>
-
 	<!-- footer -->
   	<?php
 		include('elements/footer.php');
@@ -113,4 +149,3 @@ $result = $db->query($userprofile);
 
 </body>
 </html>
-

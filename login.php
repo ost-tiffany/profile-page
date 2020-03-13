@@ -13,28 +13,12 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
 
-	<!-- responsive meta tag -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	<?php
+		include('elements/header.php');
+	?>
 
 	<title>Log In</title>
-
-	<!-- bootstrap -->
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	
-	<!-- css biasa -->
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-		<!-- Javascript -->
-	<script type="text/javascript" src="bootstrap/js/jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
-
-
-</head>
 
 <body>
 

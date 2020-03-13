@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	
 	<!-- css biasa -->
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/style.css">
 
 	<!-- font -->
 	<link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
